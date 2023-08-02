@@ -12,16 +12,16 @@
 class Solution {
 public:
     vector<int>v;
-    void pp(TreeNode* toot){
-        if(toot==NULL){
+    void pp(TreeNode* root){
+        if(root==NULL){
             return;
         }
-        pp(toot->left);
-        v.push_back(toot->val);
-        pp(toot->right);
+        pp(root->left);
+        v.push_back(root->val);
+        pp(root->right);
     }
     int kthSmallest(TreeNode* root, int k) {
-       pp(root);
+      pp(root);
         return v[k-1];
     }
 };
