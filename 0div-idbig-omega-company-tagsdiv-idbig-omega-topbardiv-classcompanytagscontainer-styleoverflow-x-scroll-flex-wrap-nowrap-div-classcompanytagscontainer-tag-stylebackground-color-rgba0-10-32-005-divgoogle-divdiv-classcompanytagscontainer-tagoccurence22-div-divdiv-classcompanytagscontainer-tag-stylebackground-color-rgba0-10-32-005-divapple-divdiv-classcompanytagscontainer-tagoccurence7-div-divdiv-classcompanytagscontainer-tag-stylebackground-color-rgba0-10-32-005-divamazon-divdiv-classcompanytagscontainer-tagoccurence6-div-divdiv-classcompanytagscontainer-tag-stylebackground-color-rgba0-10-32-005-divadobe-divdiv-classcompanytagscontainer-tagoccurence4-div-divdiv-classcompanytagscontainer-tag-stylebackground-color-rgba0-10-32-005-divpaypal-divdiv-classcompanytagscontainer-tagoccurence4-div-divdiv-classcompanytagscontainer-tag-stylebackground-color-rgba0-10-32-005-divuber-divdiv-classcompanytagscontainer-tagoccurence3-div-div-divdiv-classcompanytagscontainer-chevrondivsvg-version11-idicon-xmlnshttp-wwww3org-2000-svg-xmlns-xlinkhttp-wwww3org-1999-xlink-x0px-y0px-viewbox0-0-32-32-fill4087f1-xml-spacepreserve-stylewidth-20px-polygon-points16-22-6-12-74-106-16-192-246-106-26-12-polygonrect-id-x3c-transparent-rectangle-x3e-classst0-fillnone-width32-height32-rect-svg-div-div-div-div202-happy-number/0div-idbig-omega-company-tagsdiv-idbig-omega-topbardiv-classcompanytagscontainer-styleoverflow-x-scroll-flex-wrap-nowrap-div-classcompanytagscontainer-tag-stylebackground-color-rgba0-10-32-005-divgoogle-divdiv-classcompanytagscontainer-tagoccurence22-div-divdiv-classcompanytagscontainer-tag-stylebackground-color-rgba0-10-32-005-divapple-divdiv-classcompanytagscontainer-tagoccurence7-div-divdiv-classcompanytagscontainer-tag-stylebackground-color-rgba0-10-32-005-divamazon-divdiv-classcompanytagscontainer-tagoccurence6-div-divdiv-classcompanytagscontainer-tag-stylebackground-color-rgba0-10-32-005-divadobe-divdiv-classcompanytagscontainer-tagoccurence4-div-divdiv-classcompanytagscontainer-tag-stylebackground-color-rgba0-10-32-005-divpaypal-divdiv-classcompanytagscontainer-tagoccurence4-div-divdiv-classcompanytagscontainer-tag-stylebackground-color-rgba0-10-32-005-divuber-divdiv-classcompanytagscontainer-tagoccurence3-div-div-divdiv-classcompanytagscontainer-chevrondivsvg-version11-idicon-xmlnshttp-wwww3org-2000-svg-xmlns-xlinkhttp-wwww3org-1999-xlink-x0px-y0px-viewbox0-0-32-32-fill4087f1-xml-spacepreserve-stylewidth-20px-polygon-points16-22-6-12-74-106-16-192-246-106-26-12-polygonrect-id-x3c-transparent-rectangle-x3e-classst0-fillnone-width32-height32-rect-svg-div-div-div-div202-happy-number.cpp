@@ -10,11 +10,13 @@ public:
         return ans;
     }
     bool isHappy(int n) {
-       int slow =n, fast = n;
+       int slow =n, fast=n;
         do{
-            slow = help(slow);
+            slow= help(slow);
             fast = help(help(fast));
-        }while(slow!=fast);
-            return slow ==1;
+            
+        }while( slow != fast);
+        return slow == 1;
+        
     }
 };
