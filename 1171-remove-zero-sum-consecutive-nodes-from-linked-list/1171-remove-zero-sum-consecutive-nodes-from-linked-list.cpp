@@ -10,33 +10,19 @@
  */
 class Solution {
 public:
-    ListNode* solve(ListNode* head, bool& anychange){
-        if(head == NULL)
-            return head;
-        ListNode* temp = head;
-        int sum = 0;
-        while(temp!=NULL){
-            sum=sum+temp->val;
-            if(sum==0)
-                break;
-            temp=temp->next;
-        }
-        if(sum==0){
-            anychange= true;
-            return temp->next;
+    ListNode* removeZeroSumSublists(ListNode* head) {
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
+        int prefix = 0;
+        unordered_map<int, ListNode *> seen;
+        for(ListNode*i = dummy;i; i=i->next){
+            seen[prefix += i->val]=i;
             
         }
-        head->next = solve(head->next,anychange);
-        return head;
+        prefix =0;
+        for(ListNode* i= dummy; i; i= i->next){
+            i->next = seen[prefix += i->val]->next;
         }
-    
-    ListNode* removeZeroSumSublists(ListNode* head) {
-        while(true){
-            bool anychange = false;
-            head = solve(head,anychange);
-            if(head==NULL || anychange == false)
-                break;
-        }
-        return head;
+        return dummy ->next;
     }
 };
