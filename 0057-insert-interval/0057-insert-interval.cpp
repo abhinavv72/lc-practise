@@ -1,5 +1,5 @@
 class Solution {
-public:
+public:     
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
         vector<vector<int>>ans;
         for(int i=0; i<intervals.size(); i++){
