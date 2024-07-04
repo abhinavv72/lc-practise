@@ -10,29 +10,22 @@
  */
 class Solution {
 public:
-    ListNode* mergeNodes(ListNode* head) {
-        int cur =0;
-        ListNode* front = nullptr;
-        ListNode* back = nullptr;
-        bool first =0;
-        while(head != nullptr){
-            if(head->val ==0){
-                if(cur>0){
-                    ListNode* val = new ListNode(cur);
-                    if(front== nullptr){
-                        front = val;
-                        back = val;
-                    }else {
-                        back->next= val;
-                        back = val;
-                    }
-                    cur =0;   
-                }
-            }else {
-                cur+= head->val;
-            }
-            head = head->next;
-        }
-        return front;
-    }
+    ListNode* mergeNodes(ListNode* head){
+    //BASE CASE -> if we have a single zero, simply return null
+    if(!head->next) return nullptr;
+    
+    //fetch sum from current 0 to next 0
+    ListNode* ptr= head->next;
+    int sum=0;
+    while(ptr->val!=0) sum+= ptr->val, ptr=ptr->next;
+    
+    //assign sum on the first node between nodes having value 0.
+    head->next->val= sum;
+    
+    //call and get the answer and connect the answer to next of head->next
+    head->next->next= mergeNodes(ptr);
+    
+    //return head->next..=> new head
+    return head->next;
+}
 };
